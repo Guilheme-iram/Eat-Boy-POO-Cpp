@@ -9,6 +9,7 @@ class Fantasma: public Personagem {
         void move(char direcao) override;
         void IA();
         int tem_heroi_poderoso(char objeto);
+        bool existe_heroi_congelante();
 };
 
 

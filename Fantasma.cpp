@@ -7,7 +7,7 @@ Fantasma::Fantasma(char simb, int pos_x, int pos_y, Mapa_jogo *labirinto) :
 }
 
 void Fantasma::IA() {
-    if(estou_vivo()) {
+    if(estou_vivo() && !existe_heroi_congelante()) {
         srand((unsigned) time(0));
         int maior = 4;
         int menor = 1;
@@ -42,11 +42,11 @@ void Fantasma::move(char comando) {
 
             if (proxima_posicao == '-' || proxima_posicao == '|' || proxima_posicao == '#'){
                 break;
-            }
+            } 
             if(tem_heroi_poderoso(proxima_posicao)){
                 break;
-            }
-
+            } 
+            
             mapa->matriz[posicao_x - 1][posicao_y] = simbolo;
             mapa->matriz[posicao_x][posicao_y] = '.';
             posicao_x = posicao_x - 1;
@@ -58,14 +58,12 @@ void Fantasma::move(char comando) {
 
             if (mapa->matriz[posicao_x][posicao_y - 1] == '-' || mapa->matriz[posicao_x][posicao_y - 1] == '|' || proxima_posicao == '#'){
                 break;
-            }
+            } 
             if(tem_heroi_poderoso(proxima_posicao)){
                 break;
             }
-
             mapa->matriz[posicao_x][posicao_y - 1] = simbolo;
             mapa->matriz[posicao_x][posicao_y] = '.';
-
             posicao_x = posicao_x;
             posicao_y = posicao_y - 1;
             break;
@@ -75,14 +73,12 @@ void Fantasma::move(char comando) {
 
             if (proxima_posicao == '-' || proxima_posicao == '|' || proxima_posicao == '#'){
                 break;
-            }
+            } 
             if(tem_heroi_poderoso(proxima_posicao)){
                 break;
             }
-
             mapa->matriz[posicao_x + 1][posicao_y] = simbolo;
             mapa->matriz[posicao_x][posicao_y] = '.';
-
             posicao_x = posicao_x + 1;
             posicao_y = posicao_y;
             break;
@@ -90,16 +86,14 @@ void Fantasma::move(char comando) {
         case 'd':
             proxima_posicao = mapa->matriz[posicao_x][posicao_y + 1];
 
-            if (proxima_posicao == '-' || proxima_posicao == '|'){
+            if (proxima_posicao == '-' || proxima_posicao == '|' || proxima_posicao == '#'){
                 break;
-            }
+            } 
             if(tem_heroi_poderoso(proxima_posicao)){
                 break;
-            }
-            
+            } 
             mapa->matriz[posicao_x][posicao_y + 1] = simbolo;
             mapa->matriz[posicao_x][posicao_y] = '.';
-
             posicao_x = posicao_x;
             posicao_y = posicao_y + 1;
             break;
@@ -115,4 +109,18 @@ int Fantasma::tem_heroi_poderoso(char objeto) {
         return 1;
     }
     return 0; 
-}           
+}  
+
+bool Fantasma::existe_heroi_congelante() {
+    int contador = 0;
+    
+    int l = mapa->matriz.size(), c = mapa->matriz[0].size();
+        for (int i = 0; i < l; i++){
+            for (int j = 0; j < c; j++){
+                if (mapa->matriz[i][j] == '*') { //Analisa a matriz em busca de um heroi com o poder congelante
+                    contador += 1;
+                }
+            }
+        }
+    return (contador != 0);
+}

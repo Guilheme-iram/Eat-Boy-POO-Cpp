@@ -15,7 +15,9 @@ int main(){
 
     Heroi eatboy = Heroi('c', 7, 13, &labirinto);
     Pilula pilula = Pilula('o', 5, 22, &labirinto);
-    Fantasma fantasma_green  = Fantasma('#', 4, 8, &labirinto);
+    Pilula pilula_congelante = Pilula('O', 5, 5, &labirinto);
+    //Fantasma fantasma_green  = Fantasma('#', 4, 8, &labirinto);
+    Fantasma fantasma_green  = Fantasma('#', 8, 8, &labirinto);
     Fantasma fantasma_red = Fantasma('#', 8, 5, &labirinto);
     Fantasma fantasma_yellow = Fantasma('#', 9, 25, &labirinto);
 

@@ -60,6 +60,13 @@ char desenhopilula[4][7] = {
 	{"      "}
 };
 
+char desenhopilula_congelante[4][7] = {
+	{"      "},
+	{" .+.  "},
+	{" '+'  "},
+	{"      "}
+};
+
 char desenhovazio[4][7] = {
 	{"      "},
 	{"      "},
@@ -89,11 +96,15 @@ void Mapa_jogo::imprime_mapa(){
 						imprimeparte(desenhofantasma, parte);
 						break;
 					case 'c':
+					case '*':
 					case '@':
 						imprimeparte(desenhoheroi, parte);
 						break;
 					case 'o':
 						imprimeparte(desenhopilula, parte);
+						break;
+					case 'O':
+						imprimeparte(desenhopilula_congelante, parte);
 						break;
 					case '-':
 					case '|':
@@ -116,6 +127,51 @@ std::vector<std::vector<char>> Mapa_jogo::getMatriz(){
     return this->matriz;
 }
 
+void Mapa_jogo::imprime_vitoria(){
+
+	char vitoria[7][35] = {
+	{"      (_)    | |                  "},
+	{"__   ___  ___| |_ ___  _ __ _   _ "},
+	{"\\ \\ / / |/ __| __/ _ \\| '__| | | |"},
+	{" \\ V /| | (__| || (_) | |  | |_| |"},
+	{"  \\_/ |_|\\___|\\__\\___/|_|   \\__, |"},
+	{"                             __/ |"},
+	{"                            |___/"}
+	};
+	std::cout << std:: endl;
+	for (int i = 0; i < 7; i++){
+		for (int j = 0; j < 35; j++){
+			std::cout << vitoria[i][j];
+		}
+		std::cout << std::endl;
+	}
+
+};
+
+void Mapa_jogo::imprime_derrota(){
+
+	char derrota[7][40] = {
+		
+		{"( )                    ( )"},
+		{"| |      _    ___   __ | |"},
+		{"| |  _ / _ \\/  __)/ __ \\ |"},
+		{"| |_( ) (_) )__  \\  ___/_)"},
+		{"(____/ \\___/(____/\\____)  "},
+		{"						 (_)"}
+
+	};
+
+	std::cout << std:: endl;
+	for (int i = 0; i < 7; i++){
+		for (int j = 0; derrota[i][j] != '\0'; j++){
+			std::cout << derrota[i][j];
+		}
+		std::cout << std::endl;
+	}
+
+};
+
+
 bool Mapa_jogo::verifica_fim_de_jogo(){
 	
 	int cont_fantasma = 0;
@@ -123,17 +179,22 @@ bool Mapa_jogo::verifica_fim_de_jogo(){
 	
 	for (int i = 0; i < this->nLinha; i++){
 		for (int j = 0; j < this->nColuna; j++){
-			if (this->matriz[i][j] == '@' || this->matriz[i][j] == 'c')
+			if (this->matriz[i][j] == '@' || this->matriz[i][j] == 'c' || this->matriz[i][j] == '*')
 				cont_heroi++;
 			if (this->matriz[i][j] == '#')
 				cont_fantasma++;
 		}
 	}
 
-	if (!cont_heroi)
+	if (!cont_heroi){
+		this->imprime_derrota();
 		return true;
-	if (!cont_fantasma)
+	}
+		
+	if (!cont_fantasma){
+		this->imprime_vitoria();
 		return true;
+	}
 		
 	return false;
 }

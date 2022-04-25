@@ -10,8 +10,10 @@ void Heroi::poder(){
     if(status == 1) {
         system("color 04");
         simbolo = '@';
-    }
-    else {
+    } else if (status == 2) {
+        system("color 03");
+        simbolo = '*';
+    } else {
         simbolo = 'c';
     }
 }
@@ -106,6 +108,8 @@ void Heroi::move(char comando) {
 void Heroi::tem_pilula(char objeto){
     if (objeto == 'o')
         status = 1;
+    if (objeto == 'O')
+        status = 2;
 }
 
 int Heroi::tem_fantasma(char objeto, int status) {
