@@ -9,7 +9,6 @@ public:
     std::vector<std::vector<char>> matriz;
     int nLinha;
     int nColuna;
-    int resultado_jogo;
 
     Mapa_jogo();
     void aloca_mapa(std::string endereco);
@@ -19,4 +18,6 @@ public:
     void fim_de_jogo();
     void imprime_vitoria();
     void imprime_derrota();
+
 };
+

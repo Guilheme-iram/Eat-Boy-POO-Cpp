@@ -9,14 +9,14 @@ using namespace std;
 
 int main(){
 
-    
     Mapa_jogo labirinto = Mapa_jogo();
     labirinto.aloca_mapa("mapas\\mapa_3.txt");
 
     Heroi eatboy = Heroi('c', 7, 13, &labirinto);
+    
     Pilula pilula = Pilula('o', 5, 22, &labirinto);
     Pilula pilula_congelante = Pilula('O', 5, 5, &labirinto);
-    //Fantasma fantasma_green  = Fantasma('#', 4, 8, &labirinto);
+    
     Fantasma fantasma_green  = Fantasma('#', 8, 8, &labirinto);
     Fantasma fantasma_red = Fantasma('#', 8, 5, &labirinto);
     Fantasma fantasma_yellow = Fantasma('#', 9, 25, &labirinto);
@@ -24,7 +24,7 @@ int main(){
     labirinto.imprime_mapa();
     
     system("color 08");
-    while(1 && eatboy.estou_vivo()) {
+    while(eatboy.estou_vivo()) {
         
 
         eatboy.move(_getch());
@@ -32,15 +32,12 @@ int main(){
             labirinto.imprime_mapa();
             break;
         }
-        
-        fantasma_green.IA();
-    
-        fantasma_red.IA();
-      
-        fantasma_yellow.IA();
-        
-        labirinto.imprime_mapa();
 
+        fantasma_green.IA();
+        fantasma_red.IA();
+        fantasma_yellow.IA();
+
+        labirinto.imprime_mapa();
         if (labirinto.verifica_fim_de_jogo())
             break;
     }

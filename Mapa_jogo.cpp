@@ -7,7 +7,6 @@
 //#include "eat_boy.hpp"
 
 Mapa_jogo::Mapa_jogo() {
-	resultado_jogo = 0;
 }
 
 void Mapa_jogo::aloca_mapa(std::string endereco){
