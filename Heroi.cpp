@@ -23,6 +23,8 @@ void Heroi::move(char comando) {
         char proxima_posicao;
 
         switch (comando) {
+            
+        case 'W':
         case 'w':
             proxima_posicao = mapa->matriz[posicao_x - 1][posicao_y]; 
             if (proxima_posicao == '-' || proxima_posicao == '|'){
@@ -40,6 +42,7 @@ void Heroi::move(char comando) {
             posicao_y = posicao_y;
             break;
 
+        case 'A':
         case 'a':
             proxima_posicao = mapa->matriz[posicao_x][posicao_y - 1];
             if (proxima_posicao == '-' || proxima_posicao == '|'){
@@ -59,6 +62,7 @@ void Heroi::move(char comando) {
             posicao_y = posicao_y - 1;
             break;
 
+        case 'S':
         case 's':
             proxima_posicao = mapa->matriz[posicao_x + 1][posicao_y];
 
@@ -79,6 +83,7 @@ void Heroi::move(char comando) {
             posicao_y = posicao_y;
             break;
 
+        case 'D':
         case 'd':
             proxima_posicao = mapa->matriz[posicao_x][posicao_y + 1];
 

@@ -126,51 +126,6 @@ std::vector<std::vector<char>> Mapa_jogo::getMatriz(){
     return this->matriz;
 }
 
-void Mapa_jogo::imprime_vitoria(){
-
-	char vitoria[7][35] = {
-	{"      (_)    | |                  "},
-	{"__   ___  ___| |_ ___  _ __ _   _ "},
-	{"\\ \\ / / |/ __| __/ _ \\| '__| | | |"},
-	{" \\ V /| | (__| || (_) | |  | |_| |"},
-	{"  \\_/ |_|\\___|\\__\\___/|_|   \\__, |"},
-	{"                             __/ |"},
-	{"                            |___/"}
-	};
-	std::cout << std:: endl;
-	for (int i = 0; i < 7; i++){
-		for (int j = 0; j < 35; j++){
-			std::cout << vitoria[i][j];
-		}
-		std::cout << std::endl;
-	}
-
-};
-
-void Mapa_jogo::imprime_derrota(){
-
-	char derrota[7][40] = {
-		
-		{"( )                    ( )"},
-		{"| |      _    ___   __ | |"},
-		{"| |  _ / _ \\/  __)/ __ \\ |"},
-		{"| |_( ) (_) )__  \\  ___/_)"},
-		{"(____/ \\___/(____/\\____)  "},
-		{"						 (_)"}
-
-	};
-
-	std::cout << std:: endl;
-	for (int i = 0; i < 7; i++){
-		for (int j = 0; derrota[i][j] != '\0'; j++){
-			std::cout << derrota[i][j];
-		}
-		std::cout << std::endl;
-	}
-
-};
-
-
 bool Mapa_jogo::verifica_fim_de_jogo(){
 	
 	int cont_fantasma = 0;
@@ -186,14 +141,94 @@ bool Mapa_jogo::verifica_fim_de_jogo(){
 	}
 
 	if (!cont_heroi){
-		this->imprime_derrota();
 		return true;
 	}
 		
 	if (!cont_fantasma){
-		this->imprime_vitoria();
 		return true;
 	}
 		
 	return false;
 }
+
+std::string center(std::string str, int espacos) {
+   int n_espacos = (int)((espacos - str.length())/2);
+   return std::string(n_espacos, ' ') + str + std::string(n_espacos + (str.length() > n_espacos * 2 ? 1 : 0), ' ');
+}
+
+void Mapa_jogo::imprime_vitoria() {
+	int espacos = this->nColuna * 6;
+	int linhas_vazias = ((this->nLinha * 4) - 17) / 2;
+	
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j < this->nColuna; j++) {
+			imprimeparte(desenhoparede, i);
+		}
+		printf("\n");
+	}
+
+	for (int i = 0; i < linhas_vazias; i++){
+		imprimeparte(desenhoparede, 0); std::cout << center("                                                            ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	} 
+
+	imprimeparte(desenhoparede, 0); std::cout << center(" __  __              __                           __      ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+    imprimeparte(desenhoparede, 0); std::cout << center("/\\ \\/\\ \\  __        /\\ \\__                       /\\ \\     ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("\\ \\ \\ \\ \\/\\_\\    ___\\ \\ ,_\\   ___   _ __   __  __\\ \\ \\    ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center(" \\ \\ \\ \\ \\/\\ \\  /'___\\ \\ \\/  / __`\\/\\`'__\\/\\ \\/\\ \\\\ \\ \\   ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("  \\ \\ \\_/ \\ \\ \\/\\ \\__/\\ \\ \\_/\\ \\L\\ \\ \\ \\/ \\ \\ \\_\\ \\\\ \\_\\  ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("   \\ `\\___/\\ \\_\\ \\____\\\\ \\__\\ \\____/\\ \\_\\  \\/`____ \\\\/\\_\\ ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("    `\\/__/  \\/_/\\/____/ \\/__/\\/___/  \\/_/   `/___/> \\\\/_/ ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("                                               /\\___/     ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("                                               \\/__/      ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+    
+	for (int i = 0; i < linhas_vazias; i++){
+		imprimeparte(desenhoparede, 0); std::cout << center("                                                            ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	}
+	
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j < this->nColuna; j++) {
+			imprimeparte(desenhoparede, i);
+		}
+		printf("\n");
+	}
+}
+
+void Mapa_jogo::imprime_derrota() {
+	int espacos = this->nColuna * 6;
+	int linhas_vazias = ((this->nLinha * 4) - 17) / 2;
+	
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j < this->nColuna; j++) {
+			imprimeparte(desenhoparede, i);
+		}
+		printf("\n");
+	}
+
+	for (int i = 0; i < linhas_vazias; i++){
+		imprimeparte(desenhoparede, 0); std::cout << center("                                                              ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	} 
+
+	imprimeparte(desenhoparede, 0); std::cout << center(" __    __                   ___                           __      ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+    imprimeparte(desenhoparede, 0); std::cout << center("/\\ \\  /\\ \\                 /\\_ \\                         /\\ \\     ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("\\ `\\`\\\\/'/ ___   __  __    \\//\\ \\     ___     ____     __\\ \\ \\    ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center(" `\\ `\\ /' / __`\\/\\ \\/\\ \\     \\ \\ \\   / __`\\  /',__\\  /'__`\\ \\ \\   ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("   `\\ \\ \\/\\ \\L\\ \\ \\ \\_\\ \\     \\_\\ \\_/\\ \\L\\ \\/\\__, `\\/\\  __/\\ \\_\\  ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("     \\ \\_\\ \\____/\\ \\____/     /\\____\\ \\____/\\/\\____/\\ \\____\\\\/\\_\\ ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("      \\/_/\\/___/  \\/___/      \\/____/\\/___/  \\/___/  \\/____/ \\/_/ ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("                                                                  ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	imprimeparte(desenhoparede, 0); std::cout << center("                                                                  ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+    
+	for (int i = 0; i < linhas_vazias; i++){
+		imprimeparte(desenhoparede, 0); std::cout << center("                                                              ", espacos - 12); imprimeparte(desenhoparede, 0); printf("\n");
+	}
+	
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j < this->nColuna; j++) {
+			imprimeparte(desenhoparede, i);
+		}
+		printf("\n");
+	}
+}
+
+
+
