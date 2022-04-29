@@ -14,14 +14,19 @@ Perseguir e adquirir a pílula vai te dar poder para conseguir eliminar os fanta
 ![image](https://user-images.githubusercontent.com/83552274/165008938-7c253061-f562-4251-9cd2-3b70b66d3cf4.png)
 ![image](https://user-images.githubusercontent.com/83552274/165009034-11e5477c-3dc6-4f75-a5dd-1c7487ec18f5.png)
 
+## Freeze! Congele os fantasma!
+
+![image-4.png](attachment:image-4.png)
+![image-3.png](attachment:image-3.png)
+
 ## Agora, a vitoria é certa!
 Se você conseguir matar todos os fantasmas, a vitória é sua!
 
-![image](https://user-images.githubusercontent.com/83552274/165009138-47d71090-3f4f-42bd-ab5c-d42f6855beb4.png)
+![image-2.png](attachment:image-2.png)
 
 ## Não dá pra ganhar todas, né?
 Às vezes não dá, né. E você pode ser cercado pelos fantasmas e ser eliminado.
 
-![image](https://user-images.githubusercontent.com/83552274/165009229-0e357eec-9d2f-43f8-b3b7-18278a72f11b.png)
+![image.png](attachment:image.png)
 
 ### O que tá esperando? Experimente o Eat-boy agora! :D
