@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <ctime>
+#include <cstdlib>
 #include "Mapa_jogo.hpp"
 
 //#include "eat_boy.hpp"
@@ -23,11 +25,11 @@ void Mapa_jogo::aloca_mapa(std::string endereco){
 
     for (int i = 0; i < this->nLinha; i++){
 
-    mapa >> linha;
+		mapa >> linha;
 
-    for (char c: linha){
-        this->matriz[i].push_back(c);
-        }
+		for (char c: linha){
+			this->matriz[i].push_back(c);
+			}
     }
 }
 
@@ -82,8 +84,71 @@ void imprimeparte(char desenho[4][7], int parte) {
 	}
 }
 
+void Mapa_jogo::aparece_pilula(bool rp, bool bp){
+	
+	if (rp && bp)
+		return;
+	
+	if (!rp && !bp){
+
+		unsigned seed = time(0);
+
+    	srand(seed);
+
+		int prob = rand() % 101;
+		
+		if (prob >= 80){
+			if (!rp){
+				while (1){
+					int random_x = rand() % nLinha - 1;
+					int random_y = rand() % nColuna - 1;
+					char prox_pos = matriz[random_x][random_y];
+					bool condicao = prox_pos == '.';
+
+					if (condicao){
+						matriz[random_x][random_y] = 'o';
+						break;
+					} 
+					
+				}
+			}
+			
+			if (!bp){
+				while (1){
+					int random_x = rand() % nLinha - 1;
+					int random_y = rand() % nColuna - 1;
+					char prox_pos = matriz[random_x][random_y];
+					bool condicao = prox_pos == '.';
+					
+					if (condicao){
+						matriz[random_x][random_y] = 'O';
+						break;
+					} 
+					
+				}
+			}
+
+			return;
+		} 
+	
+	}
+
+	// if (!rp){
+	// 	std::cout << "SEM PILULA CONGELANTE" << std::endl; 
+	// }
+	
+	// if (!bp){
+	// 	std::cout << "SEM PILULA CONGELANTE" << std::endl; 
+	// }
+
+	return;
+
+	 
+}
 void Mapa_jogo::imprime_mapa(){
-//void imprime_mapa(){
+
+	bool redpill = false;
+	bool bluepill = false;
 
     for(int i = 0; i < this->nLinha; i++) {
 
@@ -100,9 +165,11 @@ void Mapa_jogo::imprime_mapa(){
 						imprimeparte(desenhoheroi, parte);
 						break;
 					case 'o':
+						redpill = true;
 						imprimeparte(desenhopilula, parte);
 						break;
 					case 'O':
+						bluepill = true;
 						imprimeparte(desenhopilula_congelante, parte);
 						break;
 					case '-':
@@ -120,11 +187,10 @@ void Mapa_jogo::imprime_mapa(){
 
 	}
 
+	aparece_pilula(redpill, bluepill);
+
 }
 
-std::vector<std::vector<char>> Mapa_jogo::getMatriz(){
-    return this->matriz;
-}
 
 bool Mapa_jogo::verifica_fim_de_jogo(){
 	

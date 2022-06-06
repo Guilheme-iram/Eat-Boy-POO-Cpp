@@ -7,12 +7,22 @@ Heroi::Heroi(char simb, int pos_x, int pos_y, Mapa_jogo *labirinto) :
 }
 
 void Heroi::poder(){
-    if(status == 1) {
+
+    if (move_status == 0){
+        system("color 06");
+        status = 0;
+    }
+        
+    if(status == 1) { 
         system("color 04");
         simbolo = '@';
+        move_status--;
+
     } else if (status == 2) {
         system("color 03");
         simbolo = '*';
+        move_status--;
+
     } else {
         simbolo = 'c';
     }
@@ -111,14 +121,20 @@ void Heroi::move(char comando) {
 
 
 void Heroi::tem_pilula(char objeto){
-    if (objeto == 'o')
+    if (objeto == 'o'){
         status = 1;
-    if (objeto == 'O')
+        move_status = 20;
+    }
+        
+    if (objeto == 'O'){
         status = 2;
+        move_status = 20;
+    }
+        
 }
 
 int Heroi::tem_fantasma(char objeto, int status) {
-    if(objeto == '#' && status == 0){             // Na colis�o com fantasma
+    if(objeto == '#' && status != 1){             // Na colis�o com fantasma
         mapa->matriz[posicao_x][posicao_y] = '.'; // Ocorre a substitui��o do caracter do personagem para um .
         return 1;
     }

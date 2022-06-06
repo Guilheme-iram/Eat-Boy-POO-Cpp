@@ -12,8 +12,8 @@ public:
 
     Mapa_jogo();
     void aloca_mapa(std::string endereco);
+    void aparece_pilula(bool rp, bool bp);
     void imprime_mapa();
-    std::vector<std::vector<char>> getMatriz();
     bool verifica_fim_de_jogo();
     void fim_de_jogo();
     void imprime_vitoria();

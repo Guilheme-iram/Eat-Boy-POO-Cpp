@@ -20,7 +20,7 @@ int main(){
     Fantasma fantasma_yellow = Fantasma('#', 9, 25, &labirinto);
 
     labirinto.imprime_mapa();
-    system("color 08");
+    system("color 06");
     
     while(eatboy.estou_vivo()) {
         
