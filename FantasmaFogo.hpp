@@ -9,7 +9,6 @@ class FantasmaFogo: public Fantasma {
         int pos_x,
         int pos_y,
         Mapa_jogo *labirinto);
-
-        //void move(char direcao) override;
+        void move(char direcao) override;
 
 };

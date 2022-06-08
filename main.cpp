@@ -10,6 +10,9 @@
 
 using namespace std;
 
+void movimentoDuplo(Fantasma fantasma){
+    fantasma.IA();
+}
 
 int main(){
 
@@ -28,13 +31,14 @@ int main(){
     Fantasma fantasma_green  = Fantasma('#', 8, 8, &labirinto);
     Fantasma fantasma_red = Fantasma('#', 8, 5, &labirinto);
     Fantasma fantasma_yellow = Fantasma('#', 9, 25, &labirinto);
+    FantasmaFogo fantasma_fire = FantasmaFogo('F', 1, 1, &labirinto);
 
     labirinto.imprime_mapa();
     system("color 06");
     
     while(eatboy.estou_vivo()) {
 
-        //system("cls");
+        system("cls");
         labirinto.imprime_mapa();
         if (labirinto.verifica_fim_de_jogo())
             break;
@@ -47,6 +51,7 @@ int main(){
         fantasma_green.IA();
         fantasma_red.IA();
         fantasma_yellow.IA();
+        fantasma_fire.IA();
         
     }
 

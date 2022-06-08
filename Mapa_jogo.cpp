@@ -56,6 +56,13 @@ char desenhofantasma[4][7] = {
 	{"'^^^' " }
 };
 
+char desenhofantasmafogo[4][7] = {
+	{" .-.  " },
+	{"| ><| " },
+	{"|  O| " },
+	{"'^^^' " }
+};
+
 char desenhoheroi[4][7] = {
 	{" .--. "  },
 	{"/ _.-'"  },
@@ -167,6 +174,9 @@ void Mapa_jogo::imprime_mapa(){
 				switch(this->matriz[i][j]){
 					case '#':
 						imprimeparte(desenhofantasma, parte);
+						break;
+					case 'F':
+						imprimeparte(desenhofantasmafogo, parte);
 						break;
 					case 'c':
 					case '*':
