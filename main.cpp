@@ -6,6 +6,7 @@
 #include <iostream>
 #include <conio.h>
 #include <stdexcept>
+#include "FantasmaFogo.hpp"
 
 using namespace std;
 
@@ -27,14 +28,13 @@ int main(){
     Fantasma fantasma_green  = Fantasma('#', 8, 8, &labirinto);
     Fantasma fantasma_red = Fantasma('#', 8, 5, &labirinto);
     Fantasma fantasma_yellow = Fantasma('#', 9, 25, &labirinto);
-    //Personagem desconhecido = Personagem('T', 1, 1, &labirinto);
 
     labirinto.imprime_mapa();
     system("color 06");
     
     while(eatboy.estou_vivo()) {
 
-        system("cls");
+        //system("cls");
         labirinto.imprime_mapa();
         if (labirinto.verifica_fim_de_jogo())
             break;

@@ -16,7 +16,7 @@ public:
     int pos_x,
     int pos_y,
     Mapa_jogo *labirinto);
-    virtual void move(char comando);
+    virtual void move(char comando) = 0;
     bool estou_vivo();
 };
 
