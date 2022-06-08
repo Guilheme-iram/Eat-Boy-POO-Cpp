@@ -4,6 +4,7 @@
 #include <fstream>
 #include <ctime>
 #include <cstdlib>
+#include <stdexcept>
 #include "Mapa_jogo.hpp"
 
 //#include "eat_boy.hpp"
@@ -13,24 +14,32 @@ Mapa_jogo::Mapa_jogo() {
 
 void Mapa_jogo::aloca_mapa(std::string endereco){
 
-    std::string linha;
-    std::ifstream mapa(endereco);
-    std::vector<char> aux;
-    mapa >> this->nLinha;
-    mapa >> this->nColuna;
+	std::ifstream mapa;
+	mapa.open(endereco);
+	if(!mapa.is_open()){
+		throw ArquivoException();
+	} else {
+		//mapa.close();
 
-    for (int i = 0; i < this->nLinha; i++){
-        this->matriz.push_back(aux);
-    }
+		//std::ifstream mapa(endereco);
+		std::string linha;
+		std::vector<char> aux;
+		mapa >> this->nLinha;
+		mapa >> this->nColuna;
 
-    for (int i = 0; i < this->nLinha; i++){
+		for (int i = 0; i < this->nLinha; i++){
+			this->matriz.push_back(aux);
+		}
 
-		mapa >> linha;
+		for (int i = 0; i < this->nLinha; i++){
 
-		for (char c: linha){
-			this->matriz[i].push_back(c);
-			}
-    }
+			mapa >> linha;
+
+			for (char c: linha){
+				this->matriz[i].push_back(c);
+				}
+		}
+	}
 }
 
 char desenhoparede[4][7] = {
@@ -296,5 +305,9 @@ void Mapa_jogo::imprime_derrota() {
 	}
 }
 
+ArquivoException::ArquivoException(){
+}
 
-
+void ArquivoException::printMsg() {
+    std::cout << "NAO FOI POSSIVEL ACESSAR O ARQUIVO DO MAPA!" << std::endl;
+}

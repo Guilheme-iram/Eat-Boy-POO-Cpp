@@ -2,15 +2,24 @@
 #include "Heroi.hpp"
 #include "Fantasma.hpp"
 #include "Pilula.hpp"
+#include "Personagem.hpp"
 #include <iostream>
 #include <conio.h>
+#include <stdexcept>
 
 using namespace std;
+
 
 int main(){
 
     Mapa_jogo labirinto = Mapa_jogo();
-    labirinto.aloca_mapa("mapas\\mapa_3.txt");
+
+    try{
+        labirinto.aloca_mapa("mapas\\mapa_3.txt");
+    } catch(ArquivoException ex) {
+        ex.printMsg();
+        return 1;
+    }
     
     Heroi eatboy = Heroi('c', 7, 13, &labirinto);
     Pilula pilula = Pilula('o', 5, 22, &labirinto);
@@ -18,12 +27,18 @@ int main(){
     Fantasma fantasma_green  = Fantasma('#', 8, 8, &labirinto);
     Fantasma fantasma_red = Fantasma('#', 8, 5, &labirinto);
     Fantasma fantasma_yellow = Fantasma('#', 9, 25, &labirinto);
+    //Personagem desconhecido = Personagem('T', 1, 1, &labirinto);
 
     labirinto.imprime_mapa();
     system("color 06");
     
     while(eatboy.estou_vivo()) {
-        
+
+        system("cls");
+        labirinto.imprime_mapa();
+        if (labirinto.verifica_fim_de_jogo())
+            break;
+
         eatboy.move(_getch());
         if(!eatboy.estou_vivo()) {
             labirinto.imprime_mapa();
@@ -32,10 +47,7 @@ int main(){
         fantasma_green.IA();
         fantasma_red.IA();
         fantasma_yellow.IA();
-
-        labirinto.imprime_mapa();
-        if (labirinto.verifica_fim_de_jogo())
-            break;
+        
     }
 
     if(eatboy.estou_vivo()){
@@ -52,21 +64,3 @@ int main(){
 
 }
 
-/*
-0 - Preto
-1 - Azul
-2 - Verde
-3 - Verde-�gua
-4 - Vermelho
-5 - Roxo
-6 - Amarelo
-7 - Branco
-8 - Cinza
-9 - Azul claro
-A - Verde Claro
-B - Verde-�gua claro
-C - Vermelho Claro
-D - Lil�s
-E - Amarelo Claro
-F - Branco Brilhante
-*/

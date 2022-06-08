@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <stdexcept>
 
 class Mapa_jogo {
 public:
@@ -21,3 +22,8 @@ public:
 
 };
 
+class ArquivoException : public std::exception {
+  public:
+    ArquivoException();
+    void printMsg();
+};

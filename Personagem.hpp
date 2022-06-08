@@ -12,8 +12,11 @@ protected:
     bool vivo = true;
 
 public:
-    Personagem(char simb, int pos_x, int pos_y, Mapa_jogo *labirinto);
-    virtual void move(char comando) = 0;
+    Personagem(char simb,
+    int pos_x,
+    int pos_y,
+    Mapa_jogo *labirinto);
+    virtual void move(char comando);
     bool estou_vivo();
 };
 
